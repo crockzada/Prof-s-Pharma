@@ -1,0 +1,39 @@
+#offcanvas{
+    
+    position:relative;
+
+    top: -35px;
+}
+
+#offcanvas img{
+    height: 30px;
+}
+
+.offcanvas-body{
+    background: rgb(2,0,36);
+background: linear-gradient(167deg, rgba(2,0,36,1) 25%, rgba(121,9,109,1) 48%, rgba(255,0,185,1) 100%);
+}
+
+
+.offcanvas-body p a {
+    color: rgb(255, 0, 234);
+
+}
+
+.logo img {
+    position: relative;
+    left: 1200px;
+}
+
+.logo h1{
+    position: relative;
+    left: 525px;
+}
+
+.textao {
+    position: relative;
+    height: 100px;
+    width: 650px;
+    top: -700px;
+    right: -200px;
+}

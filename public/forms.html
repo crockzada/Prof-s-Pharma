@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/commom.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/Sobre.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+
+      <ul>
+        <li><a href="home.html"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="produtos.html"><i class="fa-solid fa-spray-can-sparkles"></i></i>Produtos</a></li>
+        <li><a href="sobre.html"><i class="fa-solid fa-address-card"></i>Sobre</a></li>
+        <li><a href="forms.html"><i class="fa-brands fa-wpforms"></i></i>Forms</a></li>
+    </ul>
+    
+
+    <div class="offcanvas offcanvas-end" id="demo">
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title">FELLIP'S PHARMA</h1>
+    
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p><a href="home.html">Home</a></p>
+        <p><a href="produtos.html">Item</a></p>
+        <p><a href="Sobre.html">Sobre</a></p>
+        <p><a href="forms.html">Forms</a></p>
+
+        
+      </div>
+    </div>
+   
+    
+    <div id="offcanvas">
+        <div class="container-fluid mt-3">
+        <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+            
+                 <img src="imagens/hamburuger.png" alt="">
+        </button>
+        </div>
+    </div>
+
+ 
+    </header>
+    <main class="contairer">
+
+      <h1>Criar Produto</h1>
+    <div id="produtos">
+      <form class="row g-3" id="meuForm">
+
+
+
+        <div class="col-md-12">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome" name="nome">
+          <small id="nomeError" style="display: none;">Nome errado</small>
+        </div>
+        
+
+
+        <div class="mb-3">
+          <label for="descricao" class="form-label">Descrição</label>
+          <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
+        </div>
+        <div class="col-md-4 ">
+          <label for="serie" class="form-label">Série</label>
+          <input type="text" class="form-control" name="serie" id="serie" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Número de Série (Único)</small>
+        </div>
+        <div class="col-md-4 offset-md-2">
+          <label for="preco" class="form-label">Preço</label>
+          <input type="text" class="form-control" name="preco" id="preco" aria-describedby="helpId" placeholder="">
+
+        </div>
+
+        <div class="col-12">
+          <button id="submitButton" type="submit" class="btn btn-primary">Cadastrar Produto</button>
+        </div>
+      </form>
+
+      <div id="preencherFotoDiv">
+        <form id="preencherFotoForm" >
+          <div class="mb-3">
+            <label for="avatar" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" id="avatar" name="avatar">
+          </div>
+          <div class="col-12">
+            <button id="submitPhoto" type="submit" class="btn btn-primary">Alterar Foto</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  
+
+<script>
+
+    const meuForm = document.getElementById("meuForm");
+    const preencherFotoForm = document.getElementById("preencherFotoForm");
+    const nomeError = document.getElementById('nomeError');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    meuForm.addEventListener('submit', ev => {
+      ev.preventDefault();
+      const formData = new FormData(meuForm);
+      const produto = {};
+
+
+      formData.forEach((valor, atributo) => produto[atributo] = valor);
+
+      if(produto.nome.length < 5) {
+        console.log('here error')
+        nomeError.style = { display: 'block', color: 'red'}
+        return;
+      }
+
+      console.log(JSON.stringify(produto))
+      fetch('http://localhost:38000/app/produtos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(produto)
+      })
+        .then(r => r.json())
+    })
+
+    preencherFotoForm.addEventListener('submit', ev2 => {
+      ev2.preventDefault();
+      
+     
+      const formData2 = new FormData(preencherFotoForm);
+      fetch('http://localhost:38000/app/produtos/' + id + '/photo', {
+        method: 'PUT',
+        body: formData2
+      })
+        .then(r => r.json())
+    })
+
+    function loadProduto() {
+     
+      if (id) {
+        
+
+        fetch('http://localhost:38000/app/produtos/' + id)
+          .then(r => r.json())
+          .then(produto => {
+            console.log(produto)
+            document.getElementById("nome").value = produto.nome
+            document.getElementById("descricao").value = produto.descricao
+            document.getElementById("preco").value = produto.preco
+            document.getElementById("serie").value = produto.serie
+
+          })
+
+      } else {
+        document.getElementById('preencherFotoDiv').style.display="none"
+      }
+    }
+
+
+    loadProduto();
+
+  </script>
+       
+
+
+
+    </main>
+</body>
+</html>
