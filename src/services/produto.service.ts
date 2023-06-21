@@ -1,10 +1,13 @@
+import Jimp from "jimp";
+import { ProdutoDto } from "../dto/produtoDto";
 import Produto from "../models/entities/produto";
-import { ProdutoRepositorio } from "../models/entities/repositorios";
+import ProdutoRepositorio from "../models/entities/repositorios";
 import { v4 } from "uuid";
-
+import fs from 'fs';
 
 
 class ProdutoService {
+   
     private static instance: ProdutoService;
     private constructor(){
 
@@ -44,6 +47,55 @@ class ProdutoService {
             return Promise.reject("Não encontrado")
         }
     }
+
+    public async alterarProduto(dto: ProdutoDto, id: string): Promise<Produto> {
+        try{
+
+        const produto = await ProdutoRepositorio.findOneBy({id})
+        if(!produto){
+            return Promise.reject('Não encontrado')
+        }
+        produto.nome = dto.nome;
+        produto.descricao = dto.descricao;
+        produto.preco = dto.preco;
+        produto.serie = dto.serie;
+            return await ProdutoRepositorio.save(produto)
+        } catch(err) {
+            return Promise.reject(new Error('Problemas ao atualizar'));
+        }
+    }
+/*
+    public async alterarImagem(file: Express.Multer.File, id: string) : Promise<void> {
+        try{
+
+            const produto = await ProdutoRepositorio.findOneBy({id})
+            if(!produto){
+                return Promise.reject('Not Found')
+            }
+            const nomeImagem = `avatar_${id}.jpg`;
+            const imagem = await Jimp.read(file.path);
+            await imagem.resize(500,500);
+            await imagem.writeAsync('public/images/' + nomeImagem);
+            if(fs.existsSync(file.path))
+                fs.unlinkSync(file.path);
+            produto.imagem = nomeImagem;
+            await ProdutoRepositorio.save(produto);
+
+            
+        } catch(err) {
+            return Promise.reject('Nao pode processar imagem')
+        }
+    }
+
+    public async deletarProduto(id: string): Promise<void> {
+        try {
+            await ProdutoRepositorio.delete({id});
+        } catch(err){
+            return Promise.reject('Não encontrado')
+        }
+    }
+*/
+
 
 }
 

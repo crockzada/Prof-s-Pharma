@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/commom.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/produtos.css">
     <link rel="stylesheet" href="css/Sobre.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,40 +15,36 @@
 </head>
 <body>
     <header>
-
-        <ul>
-            <li><a href="home.html"><i class="fa fa-home"></i>Home</a></li>
-            <li><a href="produtos.html"><i class="fa-solid fa-spray-can-sparkles"></i></i>Produtos</a></li>
-            <li><a href="sobre.html"><i class="fa-solid fa-address-card"></i>Sobre</a></li>
-            <li><a href="forms.html"><i class="fa-brands fa-wpforms"></i></i>Forms</a></li>
-        </ul>
-
-
-        <div class="offcanvas offcanvas-end" id="demo">
-            <div class="offcanvas-header">
-              <h1 class="offcanvas-title">FELLIP'S PHARMA</h1>
-          
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        <div id="header10"> 
+            <ul>
+                <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="produtos.html"><i class="fa-solid fa-spray-can-sparkles"></i></i>Produtos</a></li>
+                <li><a href="sobre.html"><i class="fa-solid fa-address-card"></i>Sobre</a></li>
+                <li><a href="forms.html"><i class="fa-brands fa-wpforms"></i></i>Forms</a></li>
+            </ul>
             </div>
-            <div class="offcanvas-body">
-              <p><a href="home.html">Home</a></p>
-              <p><a href="produtos.html">Item</a></p>
-              <p><a href="Sobre.html">Sobre</a></p>
-              <p><a href="forms.html">Forms</a></p>
-              
-            </div>
-          </div>
-         
-          
-          <div id="offcanvas">
-              <div class="container-fluid mt-3">
-              <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                  
-                       <img src="imagens/hamburuger.png" alt="">
-              </button>
+      
+            <button class="position-fixed top-0 end-0 mt-0 pt-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="border: none; background: none;">
+                <img src="imagens/hamburuger.png" alt="Menu" style="width: 45px; height: 50px;">
+            </button>
+      
+            <div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><h1 style="color: purple;">FILLIP'S PHARMA</h1></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div id="penis">
+                  <div class="offcanvas-body">
+                    <ul class="offcanvas-list">
+                        <li><a href="index.html"><i class="fa fa-home "></i>Home</a></li>
+                        <li><a href="produtos.html"><i class="fa-solid fa-spray-can-sparkles"></i>Produtos</a></li>
+                        <li><a href="sobre.html"><i class="fa-solid fa-address-card"></i>Sobre</a></li>
+                        <li><a href="forms.html"><i class="fa-brands fa-wpforms"></i>Forms</a></li>
+                    </ul>
+                </div>
               </div>
-          </div>
-
+            </div>
  
     </header>
     <main>
@@ -61,6 +57,7 @@
               <div class="conteudo">
                   <h4>Perfume cheroso</h4>
                   <p>Perfume muito bom recomendo</p>
+                  <button class="btn btn-primary" style="background-color: rgb(240, 135, 177); border-color: black; color: black; border-width: 2px;">Editar</button>
               </div>
           </div>
 
@@ -69,7 +66,8 @@
               <div class="conteudo">
                   <h4>perfume paia</h4>
                   <p>não é perfume claro que é paia</p>
-              </div>
+                  <a  class="btn btn-primary" href="forms.html?id=${id}">Editar</a>
+                  </div>
           </div>
 
           <div class="card col-md-3 col-sm-12">
@@ -77,9 +75,12 @@
               <div class="conteudo">
                   <h4>perfume osorehc</h4>
                   <p>cheroso ao contrario</p>
+                  <button class="btn btn-primary" style="background-color: rgb(240, 135, 177); border-color: black; color: black; border-width: 2px;">Editar</button>
               </div>
           </div>
 
+
+          
          
 
          

@@ -2,6 +2,9 @@ import { Request, Response, NextFunction} from 'express'
 import ProdutoService from '../services/produto.service';
 
 class Produtocontroller {
+    static lerPorId(res: Response<any, Record<string, any>>, req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>) {
+        throw new Error("Method not implemented.");
+    }
     private static instance: Produtocontroller;
     private constructor(){
 
@@ -38,6 +41,41 @@ class Produtocontroller {
             res.status(500).send(error);
         }
     }
+
+    public async alterarProduto(req: Request, res: Response){
+        try {
+        const produtoDto = req.body;
+        const id = req.params.id;
+       await ProdutoService.getInstance().alterarProduto(produtoDto, id);
+        res.json('ok');
+        } catch(error) {
+            res.status(500).json(error);
+        }        
+    }
+/*
+    public async alterarImagem(req: Request, res: Response){
+        try {
+        const file = req.file;
+        if(file == null) throw new Error();
+        const id = req.params.id;
+       await ProdutoService.getInstance().alterarImagem(file, id);
+        res.json('ok');
+        } catch(error) {
+            res.status(500).json(error);
+        }        
+    }
+
+    public async deletarProduto(req: Request, res: Response){
+        try{
+        const id = req.params.id;
+       await ProdutoService.getInstance().deletarProduto(id);
+        res.json('ok')
+        } catch(error){
+            res.status(500).send(error);
+        }
+    }
+*/
+
 }
 
 export default Produtocontroller;

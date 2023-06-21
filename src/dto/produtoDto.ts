@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+
 export interface ProdutoDto {
     nome: string;
     serie: number;
@@ -18,3 +19,4 @@ export const ProdutoSchema = z.object({
 export const ProdutoId = z.object({
     id: z.string().length(36)
 })
+
