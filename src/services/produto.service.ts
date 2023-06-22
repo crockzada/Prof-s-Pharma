@@ -64,7 +64,7 @@ class ProdutoService {
             return Promise.reject(new Error('Problemas ao atualizar'));
         }
     }
-/*
+
     public async alterarImagem(file: Express.Multer.File, id: string) : Promise<void> {
         try{
 
@@ -94,7 +94,7 @@ class ProdutoService {
             return Promise.reject('Não encontrado')
         }
     }
-*/
+
 
 
 }

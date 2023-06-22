@@ -52,7 +52,7 @@ class Produtocontroller {
             res.status(500).json(error);
         }        
     }
-/*
+
     public async alterarImagem(req: Request, res: Response){
         try {
         const file = req.file;
@@ -74,7 +74,7 @@ class Produtocontroller {
             res.status(500).send(error);
         }
     }
-*/
+
 
 }
 

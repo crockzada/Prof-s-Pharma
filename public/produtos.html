@@ -47,41 +47,48 @@
             </div>
  
     </header>
-    <main>
-      <div id="background"></div>
-      <h1>Produtos</h1>
-      <hr/>
-      <section id="tabela-produtos">
-          <div class="card col-md-3 col-sm-12">
-              <img src="imagens/perfume1.webp" alt="">
-              <div class="conteudo">
-                  <h4>Perfume cheroso</h4>
-                  <p>Perfume muito bom recomendo</p>
-                  <button class="btn btn-primary" style="background-color: rgb(240, 135, 177); border-color: black; color: black; border-width: 2px;">Editar</button>
-              </div>
-          </div>
 
-          <div class="card col-md-3 col-sm-12">
-              <img src="imagens/sérum.webp" alt="">
-              <div class="conteudo">
-                  <h4>perfume paia</h4>
-                  <p>não é perfume claro que é paia</p>
-                  <a  class="btn btn-primary" href="forms.html?id=${id}">Editar</a>
-                  </div>
-          </div>
+    <main class="container">
+        <h1>Produtos</h1>
+        <hr/>
+        <div id="produtos">
+           
+        </div>
+        </main>
+        
+     
 
-          <div class="card col-md-3 col-sm-12">
-              <img src="imagens/perfume2.webp" alt="">
-              <div class="conteudo">
-                  <h4>perfume osorehc</h4>
-                  <p>cheroso ao contrario</p>
-                  <button class="btn btn-primary" style="background-color: rgb(240, 135, 177); border-color: black; color: black; border-width: 2px;">Editar</button>
-              </div>
-          </div>
+          
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+          
 
 
           
-         
+          <script>
+            function colocaProdutos(){
+                const produtos = document.getElementById('produtos');
+                fetch('http://localhost:38000/app/produtos')
+                .then(r => r.json())
+                .then(data => {
+                    const conteudo = data.map(p => `
+                    <div class="card" style="width: 18rem; display: inline-block">
+                        <img src="/images/${p.imagem}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${p.nome}</h5>
+                            <p class="card-text">${p.descricao}.</p>
+                            <a href="#" class="btn btn-primary">Comprar por ${p.preco}</a>
+                            <a href="/public/forms.html?id=${p.id}" class="btn btn-default">Editar Produto</a>
+                        </div>
+                        </div>
+                    `).join('');
+                    produtos.innerHTML = conteudo;
+                })
+    
+               
+            }
+            colocaProdutos();
+
+            </script>
 
          
 
