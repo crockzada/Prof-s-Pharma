@@ -2,9 +2,7 @@ import { Request, Response, NextFunction} from 'express'
 import ProdutoService from '../services/produto.service';
 
 class Produtocontroller {
-    static lerPorId(res: Response<any, Record<string, any>>, req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>) {
-        throw new Error("Method not implemented.");
-    }
+   
     private static instance: Produtocontroller;
     private constructor(){
 
@@ -18,7 +16,7 @@ class Produtocontroller {
     }
 
     public async criarProduto(req: Request, res: Response){
-        try{
+        try{   
             const produtoDto = req.body;
             const produtoSalvo = await ProdutoService.getInstance().criarProduto(produtoDto);
             res.json(produtoSalvo);
@@ -34,7 +32,7 @@ class Produtocontroller {
 
     public async lerPorId(req: Request, res: Response){
         try{
-            const id = req.params.is;
+            const id = req.params.id;
             const produto = await ProdutoService.getInstance().lerPorId(id);
             res.json(produto);
         } catch(error) {

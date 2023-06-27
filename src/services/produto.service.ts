@@ -59,6 +59,8 @@ class ProdutoService {
         produto.descricao = dto.descricao;
         produto.preco = dto.preco;
         produto.serie = dto.serie;
+        console.log("TEST")
+        console.log(produto)
             return await ProdutoRepositorio.save(produto)
         } catch(err) {
             return Promise.reject(new Error('Problemas ao atualizar'));
@@ -72,7 +74,7 @@ class ProdutoService {
             if(!produto){
                 return Promise.reject('Not Found')
             }
-            const nomeImagem = `avatar_${id}.jpg`;
+            const nomeImagem = `avatar_${id}.png`;
             const imagem = await Jimp.read(file.path);
             await imagem.resize(500,500);
             await imagem.writeAsync('public/images/' + nomeImagem);
